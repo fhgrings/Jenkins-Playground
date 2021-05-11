@@ -27,15 +27,11 @@ Descrita em Docker-compose file
 
 ## Objetivos
 
-Configurar 1 Master para controle do sistema
-
-Configurar 1 Agente Jenkins + Maven
-
-Configurar os estágios de Compile, Test e Deployment
-
-Rodar código Java para todas as etapas
-
-Escrever docker-compose com a configuração do todo
+- [x] Configurar 1 Master para controle do sistema
+- [x] Configurar 1 Agente Jenkins + Maven com Docker
+- [x] Configurar os estágios de Compile, Test e Deployment
+- [x] Rodar código Java para todas as etapas
+- [x] Escrever docker-compose com a configuração do todo
 
 
 
@@ -73,4 +69,3 @@ https://github.com/fhgrings/Jenkins-Playground.git
 
 
 Rodar o Job
-
