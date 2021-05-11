@@ -68,8 +68,7 @@ Novo Pipeline
 
 JenkinsFile from SCM
 
-https://github.com/fhgrings/Jeknins-PLayground.git
-
+https://github.com/fhgrings/Jenkins-Playground.git
 
 
 Rodar o Job
