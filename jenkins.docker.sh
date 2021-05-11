@@ -6,29 +6,25 @@
 
 # Image
 SERVICE_NAME="jenkins"
-IMAGE="jenkins/jenkins"
-PORT1=8080
-PORT2=50000
 
-# Configs
-ORG_NAME=Grings
-PASSWORD=123456
 
-#echo "# FIXME: grafana guarda plugins no volume"
+echo "Gerando chaves SSH"
 
-if [ -z "$(docker service ls | grep ${SERVICE_NAME})" ]; then 
+ssh-keygen -f ~/.ssh/jenkins_agent_key
 
-   echo "Creating service ${SERVICE_NAME}"
+echo "priv-key=$(cat ~/.ssh/jenkins_agent_key)" > .env
+echo "pub-key=$(cat ~/.ssh/jenkins_agent_key.pub)" >> .env
 
-   echo "** Downloading IMAGE "
-   docker pull ${IMAGE}
+sudo docker-compose build
 
-   docker service create --name ${SERVICE_NAME} --replicas=1 --limit-cpu=1 --limit-memory=300mb -p ${PORT1}:8080 -p ${PORT2}:50000  \
-	--mount type=volume,source=jenkins,destination=/var/jenkins_home \
-	${IMAGE}
-#	--mount type=bind,source=$(pwd)/grafana.ini,destination=/etc/grafana/grafana.ini   \
-     
-  for i in {1..5}; do echo -en "\rWaiting..$i - 5"; sleep 1; done
-fi
+sudo docker-compose up
+
 echo "Verifying service ${SERVICE_NAME}"
 echo "$(docker node ps $(docker node ls -q) -f name=${SERVICE_NAME} --filter desired-state=Running)"
+
+
+VARS1="HOME=|USER=|MAIL=|LC_ALL=|LS_COLORS=|LANG="
+VARS2="HOSTNAME=|PWD=|TERM=|SHLVL=|LANGUAGE=|_="
+docker exec ssh-agent sh -c "env | egrep -v '^(${VARS})' >> /etc/environment"
+
+echo "Configurar na console Jenkins a chave privada e o agent!"
