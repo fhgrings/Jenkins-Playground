@@ -8,6 +8,7 @@ https://www.youtube.com/watch?v=FX322RVNGj4
 
 https://www.jenkins.io/doc/
 
+https://www.jenkins.io/doc/book/using/using-agents/
 
 
 ## Desafio
